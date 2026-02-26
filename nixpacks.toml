@@ -1,0 +1,14 @@
+[phases.setup]
+nixPkgs = ["python311", "gcc", "libxml2", "libxslt"]
+
+[phases.install]
+cmds = [
+  "pip install -r backend/requirements.txt",
+  "python -m spacy download en_core_web_sm"
+]
+
+[phases.build]
+cmds = []
+
+[start]
+cmd = "uvicorn backend.api.main:app --host 0.0.0.0 --port $PORT --workers 2"
